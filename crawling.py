@@ -1,3 +1,5 @@
+import csv
+
 import selenium
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -25,6 +27,9 @@ for i in range(1, 19):
     print()
     select = Select(driver.find_element(By.CSS_SELECTOR, "#wrp_content > article > div.wrp_date > form > fieldset > select.selectbox_table.w120.selectBox"))
     try :
+        f = open('volleyball.csv', 'w', newline='')
+        wr = csv.writer(f)
+        wr.writerow([])
         for j in range(2, len(select.options) + 1):
             select_option = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article > div.wrp_date > form > fieldset > select.selectbox_table.w120.selectBox > option:nth-child(" + str(j) + ")").get_attribute("value")
             page_name_new = page_name + "&team=&yymm=" + select_option + "&r_round="
@@ -44,7 +49,7 @@ for i in range(1, 19):
                         # 상세결과에 들어가서 데이터 가져오기
                         driver.find_element(By.CSS_SELECTOR,"#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td:nth-child(10) > a").click()
 
-                        time = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td:nth-child(3) > table > tbody > tr.last > td:nth-child(7)").get_attribute("innerText")
+                        game_time = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td:nth-child(3) > table > tbody > tr.last > td:nth-child(7)").get_attribute("innerText")
 
                         h_team =  driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td.first.team > p.match > span.team").get_attribute("innerText")
                         h_score = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td:nth-child(2) > p.num").get_attribute("innerText")
@@ -72,6 +77,8 @@ for i in range(1, 19):
                         a_attackpercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.left.on > div.bar.c2 > span > span > span")).get_attribute("innerText")
                         a_recievepercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.right.on > div.bar.c2 > span > span > span")).get_attribute("innerText")
 
+                        wr.writerow([])
+                        '''
                         # 선수 기록 페이지
                         driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_tab.mt60 > ul > li:nth-child(2) > a").click()
 
@@ -93,11 +100,34 @@ for i in range(1, 19):
                                     starting_check = driver.find_element((By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(m) + ") > td:nth-child(1) > span")).get_attribute("class")
                                     if starting_check == "starting" :
                                         starting = "선발"
+                                        kim_score = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(6)")
+                                        kim_trial = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(7)")
+                                        kim_success = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(8)")
+                                        kim_block = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(9)")
+                                        kim_miss = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(10)")
+                                        kim_successpercent = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(11)")
+                                        kim_share = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(12)")
                                         break;
                                     elif starting_check == "switch" :
                                         starting = str(m) + "세트 교체"
+                                        kim_score = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(6)")
+                                        kim_trial = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(7)")
+                                        kim_success = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(8)")
+                                        kim_block = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(9)")
+                                        kim_miss = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(10)")
+                                        kim_successpercent = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(11)")
+                                        kim_share = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(12)")
                                         break;
-
+                            else :
+                                kim_score = ""
+                                kim_trial = ""
+                                kim_success = ""
+                                kim_block = ""
+                                kim_miss = driver
+                                kim_successpercent = ""
+                                kim_share = ""
+                        '''
+        f.close()
     except NoSuchElementException as e:
         print(e)
 
