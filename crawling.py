@@ -90,7 +90,13 @@ for i in range(1, 19):
                             kim_check = driver.find_element((By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_fixed.w123 > tbody > tr:nth-child(" + str(n) + ") > td.name")).get_attribute("innerText")
                             if "김연경" in kim_check :
                                 for m in range(1, 6) :
-                                    starting = driver.find_element((By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(m) + ") > td:nth-child(1) > span")).get_attribute("class")
+                                    starting_check = driver.find_element((By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(m) + ") > td:nth-child(1) > span")).get_attribute("class")
+                                    if starting_check == "starting" :
+                                        starting = "선발"
+                                        break;
+                                    elif starting_check == "switch" :
+                                        starting = str(m) + "세트 교체"
+                                        break;
 
     except NoSuchElementException as e:
         print(e)
