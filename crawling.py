@@ -24,12 +24,11 @@ for i in range(1, 19):
     WebDriverWait(driver, 5)
     time.sleep(0.5)
 
-    print()
     select = Select(driver.find_element(By.CSS_SELECTOR, "#wrp_content > article > div.wrp_date > form > fieldset > select.selectbox_table.w120.selectBox"))
     try :
         f = open('volleyball.csv', 'w', newline='')
         wr = csv.writer(f)
-        wr.writerow([])
+        wr.writerow(['상대팀', '전체득점', '상대득점', '공격득점', '블로킹득점', '서브득점', '팀범실', '상대범실', '전체득점', '디그성공', '리시브정확', '세트성공', '공격성공률', '리시브효율', '경기시간', '세트승', '세트패', '결과'])
         for j in range(2, len(select.options) + 1):
             select_option = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article > div.wrp_date > form > fieldset > select.selectbox_table.w120.selectBox > option:nth-child(" + str(j) + ")").get_attribute("value")
             page_name_new = page_name + "&team=&yymm=" + select_option + "&r_round="
@@ -77,7 +76,15 @@ for i in range(1, 19):
                         a_attackpercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.left.on > div.bar.c2 > span > span > span")).get_attribute("innerText")
                         a_recievepercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.right.on > div.bar.c2 > span > span > span")).get_attribute("innerText")
 
-                        wr.writerow([])
+
+
+                        if h_team == "흥국생명" :
+                            result = '승' if int(h_score) > int(a_score) else '패'
+                            wr.writerow([a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, h_dig, h_recieve, h_set, h_attackpercent, h_recievepercent, game_time, h_score, a_score, result])
+                        else :
+                            result = '승' if int(h_score) < int(a_score) else '패'
+                            wr.writerow([a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, h_dig, h_recieve, h_set, h_attackpercent, h_recievepercent, game_time, h_score, a_score, result])
+
                         '''
                         # 선수 기록 페이지
                         driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_tab.mt60 > ul > li:nth-child(2) > a").click()
