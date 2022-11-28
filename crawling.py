@@ -52,16 +52,16 @@ for i in range(1, 19):
 
                         h_team =  driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td.first.team > p.match > span.team").get_attribute("innerText")
                         h_score = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td:nth-child(2) > p.num").get_attribute("innerText")
-                        h_attack = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(1) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_block = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(2) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_serve = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(3) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_miss = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(4) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_all = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(5) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_dig = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(6) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_recieve = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(7) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_set = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(8) > dd.chart.clearfix.on > div.bar.c1.left > span").get_attribute("innerText")
-                        h_attackpercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.left.on > div.bar.c1 > span > span > span")).get_attribute("innerText")
-                        h_recievepercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.right.on > div.bar.c1 > span > span > span")).get_attribute("innerText")
+                        h_attack = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[1]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_block = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[2]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_serve = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[3]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_miss = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[4]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_all = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[5]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_dig = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[6]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_recieve = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[7]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_set = driver.find_element(By.XPATH, "//*[@id='tab1']/div[1]/div[1]/div/div/dl[8]/dd[1]/div[1]/span").get_attribute("innerText")
+                        h_attackpercent = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.left.on > div.bar.c1 > span > span > span").get_attribute("innerText")
+                        h_recievepercent = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.right.on > div.bar.c1 > span > span > span").get_attribute("innerText")
 
                         a_team = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td.first.team > p.match > span.team").get_attribute("innerText")
                         a_score = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td:nth-child(4) > p.num").get_attribute("innerText")
@@ -73,10 +73,10 @@ for i in range(1, 19):
                         a_dig = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(6) > dd.chart.clearfix.on > div.bar.c2.right > span").get_attribute("innerText")
                         a_recieve = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(7) > dd.chart.clearfix.on > div.bar.c2.right > span").get_attribute("innerText")
                         a_set = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.l.w470 > div > div > dl:nth-child(8) > dd.chart.clearfix.on > div.bar.c2.right > span").get_attribute("innerText")
-                        a_attackpercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.left.on > div.bar.c2 > span > span > span")).get_attribute("innerText")
-                        a_recievepercent = driver.find_element((By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.right.on > div.bar.c2 > span > span > span")).get_attribute("innerText")
+                        a_attackpercent = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.left.on > div.bar.c2 > span > span > span").get_attribute("innerText")
+                        a_recievepercent = driver.find_element(By.CSS_SELECTOR, "#tab1 > div.scrollfit.clearfix > div.fitcon.r.w470 > div > div.con.compare2.clearfix > div.chart.right.on > div.bar.c2 > span > span > span").get_attribute("innerText")
 
-
+                        print("[", h_team, "]")
 
                         if h_team == "흥국생명" :
                             result = '승' if int(h_score) > int(a_score) else '패'
