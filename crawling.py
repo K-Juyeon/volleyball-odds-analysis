@@ -45,7 +45,7 @@ for i in range(1, 19):
                     left = driver.find_element(By.CSS_SELECTOR, "#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td.tleft").get_attribute("innerText")
                     right = driver.find_element(By.CSS_SELECTOR, "#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td.tright").get_attribute("innerText")
                     if "흥국생명" in left or "흥국생명" in right :
-                        # 상세결과에 들어가서 데이터 가져오기
+                        # 상세결과의 데이터 가져오기
                         driver.find_element(By.CSS_SELECTOR,"#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td:nth-child(10) > a").click()
 
                         game_time = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td:nth-child(3) > table > tbody > tr.last > td:nth-child(7)").get_attribute("innerText")
