@@ -35,7 +35,12 @@ for i in range(1, 19):
             driver.get(page_name_new)
             table = driver.find_element(By.XPATH, "//*[@id='type1']/div/table/tbody")
             tr = table.find_elements(By.TAG_NAME, "tr")
+            #https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=001&team=&yymm=2005-02&r_round=
+            #https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=001&team=&yymm=2005-03&r_round=
+            #https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=002&team=&yymm=2005-12&r_round=
+            #https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=002&team=&yymm=2006-01&r_round=
 
+            '''
             # 여자 경기인지 판단
             for k in range(1, len(tr) + 1) :
                 time.sleep(0.2)
@@ -85,7 +90,7 @@ for i in range(1, 19):
                             result = '승' if int(h_score) < int(a_score) else '패'
                             wr.writerow([a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, h_dig, h_recieve, h_set, h_attackpercent, h_recievepercent, game_time, h_score, a_score, result])
 
-                        '''
+                        
                         # 선수 기록 페이지
                         driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_tab.mt60 > ul > li:nth-child(2) > a").click()
 
@@ -133,8 +138,9 @@ for i in range(1, 19):
                                 kim_miss = driver
                                 kim_successpercent = ""
                                 kim_share = ""
-                        '''
+                        
         f.close()
+        '''
     except NoSuchElementException as e:
         print(e)
 
