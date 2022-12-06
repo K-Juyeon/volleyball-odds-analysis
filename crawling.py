@@ -1,5 +1,4 @@
 import csv
-
 import selenium
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -82,19 +81,18 @@ for i in range(1, 19):
                         driver.find_element(By.XPATH, "//*[@id='wrp_content']/article[2]/ul/li[2]/a").click()
 
                         if "흥국생명" in h_team :
-                            driver.find_element((By.XPATH, "//*[@id='tab2']/div[1]/ul/li[1]/a")).click()
-                            table = driver.find_element(By.XPATH, "//*[@id='team1']/div/div[2]/table[1]/tbody")
-                            tr = table.find_elements(By.TAG_NAME, "tr")
+                            driver.find_element(By.XPATH, "//*[@id='tab2']/div[1]/ul/li[1]/a").click()
                         else :
-                            driver.find_element((By.XPATH, "//*[@id='tab2']/div[1]/ul/li[2]/a")).click()
-                            table = driver.find_element(By.XPATH, "//*[@id='team2']/div/div[2]/table[1]/tbody")
-                            tr = table.find_elements(By.TAG_NAME, "tr")
+                            driver.find_element(By.XPATH, "//*[@id='tab2']/div[1]/ul/li[2]/a").click()
+
+                        table = driver.find_element(By.XPATH, "//*[@id='team2']/div/div[2]/table[1]/tbody")
+                        tr = table.find_elements(By.TAG_NAME, "tr")
 
                         for n in range(1, len(tr) + 1):
-                            kim_check = driver.find_element((By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_fixed.w123 > tbody > tr:nth-child(" + str(n) + ") > td.name")).get_attribute("innerText")
+                            kim_check = driver.find_element(By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_fixed.w123 > tbody > tr:nth-child(" + str(n) + ") > td.name").get_attribute("innerText")
                             if "김연경" in kim_check :
                                 for m in range(1, 6) :
-                                    starting_check = driver.find_element((By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(m) + ") > td:nth-child(1) > span")).get_attribute("class")
+                                    starting_check = driver.find_element(By.CSS_SELECTOR, "#team2 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(m) + ") > td:nth-child(1) > span").get_attribute("class")
                                     if starting_check == "starting" :
                                         starting = "선발"
                                         kim_score = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(6)").get_attribute("innerText")
@@ -115,18 +113,27 @@ for i in range(1, 19):
                                         kim_successpercent = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(11)").get_attribute("innerText")
                                         kim_share = driver.find_element(By.CSS_SELECTOR, "#team1 > div > div.wrp_lst > table.lst_board.lst_scroll.w837.record_1 > tbody > tr:nth-child(" + str(n) + ") > td:nth-child(12)").get_attribute("innerText")
                                         break;
+                                    else :
+                                        starting = "미출전"
+                                        kim_score = ""
+                                        kim_trial = ""
+                                        kim_success = ""
+                                        kim_block = ""
+                                        kim_miss = ""
+                                        kim_successpercent = ""
+                                        kim_share = ""
                             else :
-                                starting = str(m) + "미출전"
+                                starting = "미출전"
                                 kim_score = ""
                                 kim_trial = ""
                                 kim_success = ""
                                 kim_block = ""
-                                kim_miss = driver
+                                kim_miss = ""
                                 kim_successpercent = ""
                                 kim_share = ""
 
 
-                        if h_team == "흥국생명":
+                        if "흥국생명" in h_team :
                             result = '승' if int(h_score) > int(a_score) else '패'
                             wr.writerow([a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, a_all, h_dig, h_recieve, h_set, h_attackpercent, h_recievepercent, game_time, h_score, a_score, result, starting, kim_score, kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
                         else:
