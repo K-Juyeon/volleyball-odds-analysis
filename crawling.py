@@ -32,10 +32,6 @@ for i in range(1, 19):
             driver.get(page_name_new)
             table = driver.find_element(By.XPATH, "//*[@id='type1']/div/table/tbody")
             tr = table.find_elements(By.TAG_NAME, "tr")
-            # https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=001&team=&yymm=2005-02&r_round=
-            # https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=001&team=&yymm=2005-03&r_round=
-            # https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=002&team=&yymm=2005-12&r_round=
-            # https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=002&team=&yymm=2006-01&r_round=
 
             # 여자 경기인지 판단
             for k in range(1, len(tr) + 1):
@@ -46,7 +42,10 @@ for i in range(1, 19):
                     right = driver.find_element(By.CSS_SELECTOR, "#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td.tright").get_attribute("innerText")
                     if "흥국생명" in left or "흥국생명" in right:
                         # 상세결과의 데이터 가져오기
-                        driver.find_element(By.CSS_SELECTOR, "#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td:nth-child(10) > a").click()
+                        if i < 10 :
+                            driver.find_element(By.CSS_SELECTOR, "#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td:nth-child(10) > a").click()
+                        else :
+                            driver.find_element(By.CSS_SELECTOR, "#type1 > div > table > tbody > tr:nth-child(" + str(k) + ") > td:nth-child(10) > a.btn.btn_lst.wrp_rounded.w82.btn_grey").click()
 
                         game_time_array = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article.wrp_recentgame.wrp_result > table > tbody > tr > td:nth-child(3) > table > tbody > tr.last > td:nth-child(7)").get_attribute("innerText").rstrip("m").split("h")
                         game_time = 60 * int(game_time_array[0]) + int(game_time_array[1])
@@ -131,7 +130,6 @@ for i in range(1, 19):
                                 kim_miss = ""
                                 kim_successpercent = ""
                                 kim_share = ""
-
 
                         if "흥국생명" in h_team :
                             result = '승' if int(h_score) > int(a_score) else '패'
