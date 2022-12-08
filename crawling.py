@@ -34,7 +34,6 @@ for i in range(1, 19):
     select = Select(driver.find_element(By.CSS_SELECTOR, "#wrp_content > article > div.wrp_date > form > fieldset > select.selectbox_table.w120.selectBox"))
 
     for j in range(2, len(select.options) + 1):
-        num = driver.find_element(By.XPATH, "//*[@id='type1']/div/table/tbody/tr[1]/td[2]").get_attribute("innerText")
         select_option = driver.find_element(By.CSS_SELECTOR, "#wrp_content > article > div.wrp_date > form > fieldset > select.selectbox_table.w120.selectBox > option:nth-child(" + str(j) + ")").get_attribute("value")
         page_name_new = page_name + "&team=&yymm=" + select_option + "&r_round="
         driver.get(page_name_new)
@@ -100,9 +99,8 @@ for i in range(1, 19):
 
                     for n in range(1, len(tr) + 1):
                         kim_check = driver.find_element(By.CSS_SELECTOR, "#" + team + " > div > div.wrp_lst > table.lst_board.lst_fixed.w123 > tbody > tr:nth-child(" + str(n) + ") > td.name").get_attribute("innerText")
-                        print(kim_check)
                         kim_list.append(kim_check.split(" ")[0])
-                    print(kim_list)
+
                     if "김연경" in kim_list:
                         for m in range(1, 6):
                             starting_check = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[1]/td[" + str(m) + "]/span").get_attribute("class")
@@ -117,7 +115,7 @@ for i in range(1, 19):
                                 kim_share = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(n + 1) + "]/td[12]").get_attribute("innerText")
                                 break;
                             elif "switch" in starting_check:
-                                starting = str(m) + "세트 교체"
+                                starting = "세트 교체"
                                 kim_score = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(n + 1) + "]/td[6]").get_attribute("innerText")
                                 kim_trial = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(n + 1) + "]/td[7]").get_attribute("innerText")
                                 kim_success = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(n + 1) + "]/td[8]").get_attribute("innerText")
@@ -136,13 +134,27 @@ for i in range(1, 19):
                                 kim_successpercent = ""
                                 kim_share = ""
                                 break;
+                    else:
+                        starting = "미출전"
+                        kim_score = ""
+                        kim_trial = ""
+                        kim_success = ""
+                        kim_block = ""
+                        kim_miss = ""
+                        kim_successpercent = ""
+                        kim_share = ""
+                        break;
 
                     if "흥국생명" in h_team:
                         result = '승' if int(h_score) > int(a_score) else '패'
-                        wr.writerow([a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, a_all, h_dig, h_recieve, h_set, h_attackpercent, h_recievepercent, game_time, h_score, a_score, result, starting, kim_score, kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
+                        wr.writerow([a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, a_all, h_dig, h_recieve, h_set,
+                                     h_attackpercent, h_recievepercent, game_time, h_score, a_score, result, starting, kim_score,
+                                     kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
                     elif "흥국생명" in a_team:
                         result = '승' if int(h_score) < int(a_score) else '패'
-                        wr.writerow([h_team, a_attack, a_block, a_serve, h_miss, a_miss, a_all, h_all, a_dig, a_recieve, a_set, a_attackpercent, a_recievepercent, game_time, a_score, h_score, result, starting, kim_score, kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
+                        wr.writerow([h_team, a_attack, a_block, a_serve, h_miss, a_miss, a_all, h_all, a_dig, a_recieve, a_set,
+                                     a_attackpercent, a_recievepercent, game_time, a_score, h_score, result, starting, kim_score,
+                                     kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
 
 f.close()
 '''
