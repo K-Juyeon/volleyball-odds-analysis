@@ -90,6 +90,7 @@ try :
 
                             if "흥국생명" in h_team:
                                 driver.find_element(By.XPATH, "//*[@id='tab2']/div[1]/ul/li[1]/a").send_keys(Keys.ENTER)
+                                #//*[@id="tab2"]/div[2]/ul/li[1]/a
                                 team = "team1"
                             else:
                                 driver.find_element(By.XPATH, "//*[@id='tab2']/div[1]/ul/li[2]/a").send_keys(Keys.ENTER)
