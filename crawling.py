@@ -4,12 +4,12 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
 
 '''
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 import time
-
 from selenium.webdriver.support.wait import WebDriverWait
 '''
 
@@ -141,7 +141,7 @@ for i in range(1, 19):
                             result = '승' if int(h_score) < int(a_score) else '패'
                             wr.writerow([h_team, a_attack, a_block, a_serve, h_miss, a_miss, a_all, h_all, a_dig, a_recieve, a_set, a_attackpercent, a_recievepercent, game_time, a_score, h_score, result, starting, kim_score, kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
 
-                        driver.find_element(By.XPATH, "//*[@id='wrp_content']/article[1]/div/a").click()
+                        driver.find_element(By.XPATH, "//*[@id='wrp_content']/article[1]/div/a").send_keys(Keys.ENTER)
 
         f.close()
 
@@ -149,3 +149,5 @@ for i in range(1, 19):
         print(e)
 
 driver.quit()  # driver 종료
+
+print("크롤링 종료")
