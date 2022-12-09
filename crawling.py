@@ -26,7 +26,7 @@ driver = selenium.webdriver.Chrome('./chromedriver/chromedriver')
 
 f = open('volleyball.csv', 'w', newline='')
 wr = csv.writer(f)
-wr.writerow(['상대팀', '공격득점', '블로킹득점', '서브득점', '팀범실', '상대범실', '전체득점', '상대득점', '디그성공', '리시브정확', '세트성공',
+wr.writerow(['시즌', '상대팀', '공격득점', '블로킹득점', '서브득점', '팀범실', '상대범실', '전체득점', '상대득점', '디그성공', '리시브정확', '세트성공',
              '공격성공률', '리시브효율', '경기시간', '세트승', '세트패', '결과', '김연경', '김연경득점', '김연경시도', '김연경성공', '김연경공격차단',
              '김연경범실', '김연경성공률', '김연경점유율'])
 
@@ -120,18 +120,8 @@ try :
                                 num = kim_list.index("김연경")
                                 for m in range(1, 6):
                                     starting_check = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[1]/td[" + str(m) + "]/span").get_attribute("class")
-                                    if "starting" in starting_check:
+                                    if "starting" in starting_check or "switch" in starting_check:
                                         starting = "선발"
-                                        kim_score = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[6]").get_attribute("innerText")
-                                        kim_trial = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[7]").get_attribute("innerText")
-                                        kim_success = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[8]").get_attribute("innerText")
-                                        kim_block = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[9]").get_attribute("innerText")
-                                        kim_miss = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[10]").get_attribute("innerText")
-                                        kim_successpercent = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[11]").get_attribute("innerText")
-                                        kim_share = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[12]").get_attribute("innerText")
-                                        break;
-                                    elif "switch" in starting_check:
-                                        starting = "세트 교체"
                                         kim_score = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[6]").get_attribute("innerText")
                                         kim_trial = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[7]").get_attribute("innerText")
                                         kim_success = driver.find_element(By.XPATH, "//*[@id='" + team + "']/div/div[2]/table[2]/tbody/tr[" + str(num + 1) + "]/td[8]").get_attribute("innerText")
@@ -162,12 +152,12 @@ try :
 
                             if "흥국생명" in h_team:
                                 result = '승' if int(h_score) > int(a_score) else '패'
-                                wr.writerow([a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, a_all, h_dig, h_recieve, h_set,
+                                wr.writerow([i, a_team, h_attack, h_block, h_serve, a_miss, h_miss, h_all, a_all, h_dig, h_recieve, h_set,
                                              h_attackpercent, h_recievepercent, game_time, h_score, a_score, result, starting, kim_score,
                                              kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
                             elif "흥국생명" in a_team:
                                 result = '승' if int(h_score) < int(a_score) else '패'
-                                wr.writerow([h_team, a_attack, a_block, a_serve, h_miss, a_miss, a_all, h_all, a_dig, a_recieve, a_set,
+                                wr.writerow([i, h_team, a_attack, a_block, a_serve, h_miss, a_miss, a_all, h_all, a_dig, a_recieve, a_set,
                                              a_attackpercent, a_recievepercent, game_time, a_score, h_score, result, starting, kim_score,
                                              kim_trial, kim_success, kim_block, kim_miss, kim_successpercent, kim_share])
 
@@ -175,6 +165,7 @@ try :
                 else :
                     pass
 except NoSuchElementException as e :
+    print(driver.current_url)
     print(e)
 
 f.close()
