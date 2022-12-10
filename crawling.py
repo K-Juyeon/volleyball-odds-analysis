@@ -180,6 +180,6 @@ except NoSuchElementException as e :
 
 f.close()
 
-# driver.quit()  # driver 종료
+driver.quit()  # driver 종료
 
 print("크롤링 종료")
